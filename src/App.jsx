@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Home from './Home';
 import Settings from './Settings';
+import TestPage from './TestPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -48,16 +49,23 @@ function App() {
             >
               Settings
             </button>
+            <button
+              style={currentPage === 'TestPage' ? styles.activeMenuItem : styles.menuItem}
+              onClick={() => {
+                setCurrentPage('TestPage');
+                setShowDrawer(false);
+              }}
+            >
+              Test Command
+            </button>
           </nav>
         </aside>
       )}
 
       <main style={styles.pageContent}>
-        {currentPage === 'home' ? (
-          <Home config={serialConfig} setConfig={setSerialConfig} />
-        ) : (
-          <Settings config={serialConfig} setConfig={setSerialConfig} />
-        )}
+        {currentPage === 'home' && <Home config={serialConfig} setConfig={setSerialConfig} />}
+        {currentPage === 'settings' && <Settings config={serialConfig} setConfig={setSerialConfig} />}
+        {currentPage === 'TestPage' && <TestPage config={serialConfig} setConfig={setSerialConfig} />}
       </main>
     </div>
   );
